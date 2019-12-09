@@ -24,12 +24,16 @@ unsigned int create_max() {
 	return max;
 }
 
+unsigned int create_min() {
+	return 0;
+}
+
 struct RMQ {
 	vint& v;
 	vector<vint> A;
 	vint block;
 	
-	RMQ(vint& v): v(v), block((int)(v.size()/ceil_log2(v.size())), create_max()) {
+	RMQ(vint& v): v(v), block((int)(v.size()/ceil_log2(v.size())), create_min()) {
 		int b = ceil_log2(v.size());
 
 		cout << b << endl;
@@ -50,7 +54,7 @@ struct RMQ {
 				cout << "blok_idx=" << blk_idx << endl;
 			}
 
-			if (block[blk_idx] > v[i]){
+			if (block[blk_idx] < v[i]){
 				block[blk_idx] = v[i];
 			}
 		}
@@ -63,23 +67,23 @@ struct RMQ {
 	int query(int l, int r){
 		int b = ceil_log2(v.size());
 
-		int res = create_max();
+		int res = create_min();
 
 		int blk_idx_l = (int)(l/b);
 		int blk_idx_r = (int)(r/b);
 
 		while ((l < r) && ((l%b) != 0) && (l != 0)){
-			if (v[l] < res)
+			if (v[l] > res)
 				res = v[l];
 			l ++;
 		}
 		while ((l + b) <= r){
-			if (block[(int)(l/b)] < res)
+			if (block[(int)(l/b)] > res)
 				res = block[(int)(l/b)];
 			l = l + b;
 		}
 		while (l <= r){
-			if(v[l] < res)
+			if(v[l] > res)
 				res = v[l];
 			l ++;
 		}
