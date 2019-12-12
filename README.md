@@ -1,6 +1,6 @@
 # Range Maximum Query (rMq) Implementations
 
-When I was searching for code implementations concerning range queries I found many repos with implementations focused on the range minimum query (rmq) problem. But some algorithms must solve a similar problem, named range Maximum query (rMq).
+When I was searching for code implementations concerning range queries I found many repos with implementations focused on the range minimum query (rmq) problem. But I couldn't find many implementations to a similar problem, namely the range Maximum query (rMq) problem.
 
 The range Maximum query (rMq) problem is the following:
 
